@@ -4,7 +4,7 @@
 
 @layer base {
     body{
-        @apply bg-[#141414] text-white;
+        @apply bg-[#141414] text-white !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-[#be264c];
     }
     header{
         @apply fixed top-0 z-50 flex w-full items-center justify-between px-4 py-4 transition-all lg:px-10 lg:py-4;
@@ -22,3 +22,6 @@ header{
     backdrop-filter: blur(12px);
     box-shadow: 0px 40px 40px 8px rgba(0, 0, 0, 0.16);
 }
+
+
+/* #be264c */

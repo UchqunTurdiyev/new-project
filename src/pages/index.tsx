@@ -1,8 +1,23 @@
 
-import { Header } from '@/components'
 import Head from 'next/head'
+import { Header, Hero } from 'src/components';
+import { API_REQUEST } from './../services/api.services';
+import { useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import { IMove } from './../interfaces/app.interfaces';
+import { Row } from 'src/components/row/row';
 
-export default function Home() {
+
+export default function Home({trending, topRated}: HomeProps):JSX.Element {
+console.log(topRated);
+
+
+  // useEffect(() => {
+  //   fetch(API_REQUEST.trending).then(res => res.json())
+  //   .then(data => console.log(data)
+  //   )
+  // }, [])
+
   return (
     <div className='relative h-[200vh]'>
       <Head>
@@ -12,6 +27,31 @@ export default function Home() {
         <link rel="icon" href="/logo.svg" />
       </Head>
       <Header />
+      <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16'>
+      <Hero trending={trending} />
+        <section>
+            <Row title="Top Rated" movies={topRated} />
+        </section>
+      </main>
     </div>
   )
+}
+
+
+// SERVISE SITE RENDERING
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  const trending = await fetch(API_REQUEST.trending).then(res => res.json());
+  const topRated = await fetch(API_REQUEST.top_rated).then(res => res.json());
+
+  return{
+    props:{
+      trending: trending.results,
+      topRated: topRated.results
+    }
+  }
+}
+
+interface HomeProps {
+  trending: IMove[],
+  topRated: IMove[]
 }
