@@ -8,12 +8,20 @@ import { IMove } from './../interfaces/app.interfaces';
 import { Row } from 'src/components/row/row';
 import { useContext } from 'react';
 import { AuthContext } from './../context/auth.context';
+import { useInfoStore } from 'src/store';
+import { Modal } from './../components/modal/Modal';
 
 
 export default function Home({trending, topRated, tvTopRated, popular ,playing, fantasy}: HomeProps):JSX.Element {
 const {isLoading} = useContext(AuthContext)
 
 if(isLoading) return <>{null}</>;
+
+const {setModal, modal} = useInfoStore();
+// const {isLoading} = useContext(AuthContext)
+
+console.log(modal);
+
 
   return (
     <div className='relative min-h-screen'>
@@ -34,6 +42,7 @@ if(isLoading) return <>{null}</>;
             <Row title="Playing" movies={playing.reverse()} />
         </section>
       </main>
+      {modal && <Modal />}
     </div>  
   )
 }
@@ -41,13 +50,14 @@ if(isLoading) return <>{null}</>;
 
 // SERVISE SITE RENDERING
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const trending = await fetch(API_REQUEST.trending).then(res => res.json());
-  const topRated = await fetch(API_REQUEST.top_rated).then(res => res.json());
-  const tvTopRated = await fetch(API_REQUEST.tv_top_rated).then(res => res.json());
-  const popular = await fetch(API_REQUEST.popular).then(res => res.json());
-  const playing = await fetch(API_REQUEST.playing).then(res => res.json());
-  const fantasy = await fetch(API_REQUEST.fantasy).then(res => res.json());
-  
+  const [trending, topRated, tvTopRated, popular, playing, fantasy] = await Promise.all([
+    fetch(API_REQUEST.trending).then(res => res.json()),
+    fetch(API_REQUEST.top_rated).then(res => res.json()),
+    fetch(API_REQUEST.tv_top_rated).then(res => res.json()),
+    fetch(API_REQUEST.popular).then(res => res.json()),
+    fetch(API_REQUEST.playing).then(res => res.json()),
+    fetch(API_REQUEST.fantasy).then(res => res.json())
+  ]);
 
   return{
     props:{

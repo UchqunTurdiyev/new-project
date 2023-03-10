@@ -5,9 +5,11 @@ import Image from "next/image";
 import { image_base } from "./../constants";
 import {BsPlay} from "react-icons/bs"
 import ReactStars from "react-stars";
+import { useInfoStore } from 'src/store';
 
 export const Hero = ({ trending }: HerpProps): JSX.Element => {
   const [movie, setMovie] = useState<IMove>({} as IMove);
+  const {setModal, setCurrentMovie} = useInfoStore()
 
   // Home rasmida kinolarni aylanib turishi uchun
   useEffect(() => {
@@ -15,6 +17,9 @@ export const Hero = ({ trending }: HerpProps): JSX.Element => {
     setMovie(randomMovie);
   }, [trending]);
 
+  const handleCurrentModal = () => {
+    setModal(true), setCurrentMovie(movie)
+  }
 
   return (
     <div className="flex flex-col space-y-2 pt-28 pb-10 md:space-y-4 lg:h-[65vh] lg:pb-12 lg:justify-center">
@@ -34,7 +39,7 @@ export const Hero = ({ trending }: HerpProps): JSX.Element => {
       <h1 className="font-bold text-2xl md:text-4xl lg:text-6xl">{movie?.title || movie?.name}</h1>
       <p className="max-w-xs max-lg:max-w-xl max-sm:w-5/6 mg:max-w-lg lg:max-w-2xl text-xs md:text-lg lg:text-2xl lg:leading-10">{movie.overview?.slice(0, 140)}...</p>
       <div className="">
-      <button className="flex bg-[#00000080] items-center justify-center border-2 text-white font-bold rounded-full max-md:text-sm w-36 h-12 lg:w-52 lg:h-14 "><BsPlay className="w-5 h-5 md:h-8 md:w-8" /> Watch now</button>
+      <button onClick={handleCurrentModal} className="flex bg-[#00000080] hover:bg-[#000000ba] transition-all items-center justify-center border-2 text-white font-bold rounded-full max-md:text-sm w-36 h-12 lg:w-52 lg:h-14 "><BsPlay className="w-5 h-5 md:h-8 md:w-8" /> Watch now</button>
       </div>
     </div>
   );
