@@ -6,9 +6,15 @@ import TextField from "./../components/text-field/textField";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "./../context/auth.context";
+import { useRouter } from 'next/router';
+import Loader from 'src/components/loader/Loader';
 
 const Auth = () => {
-  const { isLoading, error, signIn } = useContext(AuthContext);
+  const { isLoading, error, signIn, user } = useContext(AuthContext);
+  const router = useRouter()
+
+  if(user) router.push('/')
+  if(!isLoading) return <><Loader /></>
 
   const onSubmit = (formData) => {
     signIn(formData.email, formData.password)

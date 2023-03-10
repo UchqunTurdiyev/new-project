@@ -6,9 +6,14 @@ import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { IMove } from './../interfaces/app.interfaces';
 import { Row } from 'src/components/row/row';
+import { useContext } from 'react';
+import { AuthContext } from './../context/auth.context';
 
 
 export default function Home({trending, topRated, tvTopRated, popular ,playing, fantasy}: HomeProps):JSX.Element {
+const {isLoading} = useContext(AuthContext)
+
+if(isLoading) return <>{null}</>;
 
   return (
     <div className='relative min-h-screen'>

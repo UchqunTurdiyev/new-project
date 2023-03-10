@@ -10,7 +10,7 @@ import { AuthContext } from "./../context/auth.context";
 const Logout = () => {
   const { isLoading, error, logout, signUp, } = useContext(AuthContext);
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData:{ email:string, password: string}) => {
     signUp(formData.email, formData.password)
     console.log(formData);
   };

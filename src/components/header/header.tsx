@@ -1,12 +1,15 @@
 import React,{ useState, useEffect } from 'react'
 import Image from 'next/image';
 import {FiUser} from "react-icons/fi"
-import {AiOutlineSearch} from "react-icons/ai"
+import {AiOutlineSearch, AiOutlineLogout} from "react-icons/ai"
 import {BiBellMinus} from "react-icons/bi"
 import Link from 'next/link';
+import { useContext } from 'react';
+import { AuthContext } from './../../context/auth.context';
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false)
+  const {logout} = useContext(AuthContext)
 
   // start scroll effects 
   useEffect(() => {
@@ -43,6 +46,7 @@ export const Header = () => {
             <Link href={"account"}>
             <FiUser className='h-6 w-6 cursor-pointer'/>
             </Link>
+            <AiOutlineLogout className='h-6 w-6 cursor-pointer' onClick={logout}/>
          </div>
     </header>
   )
