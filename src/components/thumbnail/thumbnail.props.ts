@@ -1,5 +1,6 @@
 
 import { IMove } from '../../interfaces/app.interfaces';
 export interface ThumbnailProps {
-    movie: IMove[]
+    movie: IMove;
+    isBig?: boolean;
 }

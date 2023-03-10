@@ -7,11 +7,12 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "./../context/auth.context";
 
-const Auth = () => {
-  const { isLoading, error, signIn } = useContext(AuthContext);
+const Logout = () => {
+  const { isLoading, error, logout, signUp, } = useContext(AuthContext);
 
   const onSubmit = (formData) => {
-    signIn(formData.email, formData.password)
+    signUp(formData.email, formData.password)
+    console.log(formData);
   };
 
   const validation = Yup.object({
@@ -50,7 +51,7 @@ const Auth = () => {
         className="absolute left-5 top-5 object-contain cursor-pointer"
       />
       <div className="relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0 md:w-[500px] md:px-14">
-        <h1 className="font-semibold text-4xl">Sign In</h1>
+        <h1 className="font-semibold text-4xl">Sign Up</h1>
         {error && <p className="w-full text-red-500 font-semibold">{error}</p>}
         <Formik
           initialValues={{ email: "", password: "" }}
@@ -71,12 +72,12 @@ const Auth = () => {
               disabled={isLoading}
               className="w-full bg-[#be264c] py-3 my-4 font-semibold"
             >
-             {isLoading ? "Loading..." : 'Sign In'}
+             {isLoading ? "Loading..." : 'Sign Up'}
             </button>
             <div className="text-slate-500">
               Not yet account?
-              <Link href="/logout" className="text-white hover:underline pl-2">
-                Sign Up Now
+              <Link href="/auth" className="text-white hover:underline pl-2">
+                Sign In
               </Link>
             </div>
           </Form>
@@ -86,4 +87,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Logout;
