@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import { AuthContext } from './../context/auth.context';
 import { useInfoStore } from 'src/store';
 import { Modal } from './../components/modal/Modal';
+import { SubscriptionPlan } from './../components/subscription/subscription-plan';
 
 
 export default function Home({trending, topRated, tvTopRated, popular ,playing, fantasy}: HomeProps):JSX.Element {
@@ -20,7 +21,9 @@ if(isLoading) return <>{null}</>;
 const {modal} = useInfoStore();
 // const {isLoading} = useContext(AuthContext)
 
-console.log(modal);
+const subscription = false;
+
+if(!subscription) return <SubscriptionPlan />
 
 
   return (
