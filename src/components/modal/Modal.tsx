@@ -3,7 +3,7 @@ import { useInfoStore } from "src/store";
 import { useEffect, useState } from "react";
 import { Element } from "src/interfaces/app.interfaces";
 import ReactPlayer from "react-player";
-import { BsFillPlayFill, BsPlusLg } from "react-icons/bs";
+import { BsFillPlayFill, BsPlusLg, BsFillPauseFill } from "react-icons/bs";
 import { AiOutlineClose, AiOutlineLike } from "react-icons/ai";
 import { GoMute, GoUnmute } from "react-icons/go";
 
@@ -11,6 +11,7 @@ export const Modal = () => {
   const { modal, setModal, currentMovie } = useInfoStore();
   const [trailer, setTrailer] = useState<string>("");
   const [muted, setMuted] = useState<boolean>(true);
+  const [playing, setPlaying] = useState<boolean>(true)
 
   const base_url = process.env.NEXT_PUBLIC_API_DOMAIN as string;
   const api_key = process.env.NEXT_PUBLIC_API_KEY as string;
@@ -60,14 +61,23 @@ export const Modal = () => {
             url={`https://www.youtube.com/watch?v=${trailer}`}
             width={"100%"}
             height={"100%"}
-            playing
+            playing={playing}
             style={{ position: "absolute", top: "0", left: "0" }}
             muted={muted}
           />
           <div className="absolute bottom-4 left-2 flex w-full items-center justify-between px-18">
             <div className="flex space-x-2">
-              <button className="flex items-center gap-x-2 rounded bg-white px-5 py-2 text-xs font-bold text-black transition hover:bg-[#e6e6e6]">
-                <BsFillPlayFill className="h-7 w-7 text-black" /> Play
+              <button onClick={() => setPlaying(prev => !prev)} className="flex items-center gap-x-2 rounded bg-white px-5 py-2 text-xs font-bold text-black transition hover:bg-[#e6e6e6]">
+              {playing ? (
+                <>
+                  <BsFillPauseFill  className="h-5 w-5 text-black"  /> Pause
+                </>
+              ):(
+                 <>
+                 <BsFillPlayFill className="h-5 w-5 text-black" /> Play
+                 </>
+              )}
+                
               </button>
               <button className="modalButton">
                 <BsPlusLg className="w-5 h-5" />
@@ -92,16 +102,21 @@ export const Modal = () => {
         <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
           <div className="space-y-6 text-lg">
             <div className="flex items-center space-x-2 text-sm">
-              <p className="font-semibold text-green-400 ">{currentMovie?.vote_average * 10}% Match</p>
-               <p className="font-light">{currentMovie?.release_date}</p>
-               <div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">HD</div>
+              <p className="font-semibold text-green-400 ">
+                {currentMovie?.vote_average * 10}% Match
+              </p>
+              <p className="font-light">{currentMovie?.release_date}</p>
+              <div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">
+                HD
+              </div>
             </div>
 
             <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
               <p className="w-5/6">{currentMovie?.overview}</p>
               <div className="flex flex-col space-y-3 text-sm">
                 <div>
-                  <span className="text-[gray]">Total votes:</span>{currentMovie?.vote_count}
+                  <span className="text-[gray]">Total votes:</span>
+                  {currentMovie?.vote_count}
                 </div>
               </div>
             </div>

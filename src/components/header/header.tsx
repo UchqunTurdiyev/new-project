@@ -28,7 +28,7 @@ export const Header = () => {
 
 
   return (
-    <header className={`${scrolled && 'bg-[#be264c]'}`}>
+    <header className={`${scrolled && 'bg-[#141414]'}`}>
         <div className='flex items-center space-x-2 md:space-x-10'>
             <Image priority src={"/logo.svg"} alt={"Logo img"} width={56} height={56} className="object-contain cursor-pointer" />
             <ul className='space-x-4 md:flex hidden'>
