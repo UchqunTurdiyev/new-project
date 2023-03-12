@@ -14,7 +14,7 @@ const Auth = () => {
   const router = useRouter()
 
   if(user) router.push('/')
-  if(!isLoading) return <><Loader /></>
+  if(isLoading) return <><Loader /></>
 
   const onSubmit = (formData) => {
     signIn(formData.email, formData.password)

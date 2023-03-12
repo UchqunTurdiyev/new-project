@@ -17,3 +17,7 @@ export interface IMove {
     vote_count: number;
     name: string;
 }
+
+export interface Element {
+    type: 'Trailer' | 'Clip' | 'Behind the Scenes' | 'Opening Credits'; 
+}
