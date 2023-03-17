@@ -21,3 +21,16 @@ export interface IMove {
 export interface Element {
     type: 'Trailer' | 'Clip' | 'Behind the Scenes' | 'Opening Credits'; 
 }
+
+export interface Product {
+	default_price: {
+		id: string;
+		unit_amount: number;
+	};
+	id: string;
+	images: string[];
+	metadata: {
+		adv: string;
+	};
+	name: string;
+}

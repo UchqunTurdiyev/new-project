@@ -4,7 +4,7 @@ import { Header, Hero } from 'src/components';
 import { API_REQUEST } from './../services/api.services';
 import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import { IMove } from './../interfaces/app.interfaces';
+import { IMove, Product } from './../interfaces/app.interfaces';
 import { Row } from 'src/components/row/row';
 import { useContext } from 'react';
 import { AuthContext } from './../context/auth.context';
@@ -13,7 +13,7 @@ import { Modal } from './../components/modal/Modal';
 import { SubscriptionPlan } from './../components/subscription/subscription-plan';
 
 
-export default function Home({trending, topRated, tvTopRated, popular ,playing, fantasy}: HomeProps):JSX.Element {
+export default function Home({trending, topRated, tvTopRated, popular ,documentary, comedy, products}: HomeProps):JSX.Element {
 const {isLoading} = useContext(AuthContext)
 
 if(isLoading) return <>{null}</>;
@@ -23,7 +23,7 @@ const {modal} = useInfoStore();
 
 const subscription = false;
 
-if(!subscription) return <SubscriptionPlan />
+if(!subscription) return <SubscriptionPlan products={products} />
 
 
   return (
@@ -41,8 +41,8 @@ if(!subscription) return <SubscriptionPlan />
             <Row title="Top Rated" movies={topRated} />
             <Row title="TV show" movies={tvTopRated} isBig={true} />
             <Row title="Popular" movies={popular} />
-            <Row title="Fantasy" movies={fantasy} />
-            <Row title="Playing" movies={playing.reverse()} />
+            <Row title="Fantasy" movies={comedy} />
+            <Row title="Playing" movies={documentary.reverse()} />
         </section>
       </main>
       {modal && <Modal />}
@@ -53,24 +53,29 @@ if(!subscription) return <SubscriptionPlan />
 
 // SERVISE SITE RENDERING
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const [trending, topRated, tvTopRated, popular, playing, fantasy] = await Promise.all([
+  const [trending, topRated, tvTopRated, popular, documentary, comedy, family, history, products] = await Promise.all([
     fetch(API_REQUEST.trending).then(res => res.json()),
     fetch(API_REQUEST.top_rated).then(res => res.json()),
     fetch(API_REQUEST.tv_top_rated).then(res => res.json()),
     fetch(API_REQUEST.popular).then(res => res.json()),
-    fetch(API_REQUEST.playing).then(res => res.json()),
-    fetch(API_REQUEST.fantasy).then(res => res.json())
+    fetch(API_REQUEST.documentary).then(res => res.json()),
+    fetch(API_REQUEST.comedy).then(res => res.json()),
+    fetch(API_REQUEST.family).then(res => res.json()),
+    fetch(API_REQUEST.history).then(res => res.json()),
+    fetch(API_REQUEST.products_list).then(res => res.json()),
   ]);
 
   return{
     props:{
-      trending: trending.results,
-      topRated: topRated.results,
-      tvTopRated: tvTopRated.results,
-      popular: popular.results,
-      playing: playing.results,
-      fantasy: fantasy.results,
-     
+			trending: trending.results,
+			topRated: topRated.results,
+			tvTopRated: tvTopRated.results,
+			popular: popular.results,
+			documentary: documentary.results,
+			comedy: comedy.results,
+			family: family.results,
+			history: history.results,
+			products: products.products.data,
     }
   }
 }
@@ -80,6 +85,9 @@ interface HomeProps {
   topRated: IMove[],
   tvTopRated: IMove[],
   popular: IMove[],
-  fantasy: IMove[],
-  playing: IMove[],
+  documentary: IMove[],
+  comedy: IMove[],
+  family: IMove[],
+  history: IMove[],
+  products: Product[],
 }
