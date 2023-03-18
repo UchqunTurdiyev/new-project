@@ -8,11 +8,16 @@ import * as Yup from "yup";
 import { AuthContext } from "./../context/auth.context";
 
 const Logout = () => {
-  const { isLoading, error, logout, signUp, } = useContext(AuthContext);
+  const { isLoading, error, signUp} = useContext(AuthContext);
 
-  const onSubmit = (formData:{ email:string, password: string}) => {
+  const onSubmit = async (formData:{ email:string, password: string}) => {
     signUp(formData.email, formData.password)
-    console.log(formData);
+    const response = await fetch("/api/customer", {
+      method: 'POST',
+      headers: {'Content-type': 'aplication/json'},
+      body: JSON.stringify({email: formData.email})
+    })
+    await response.json()
   };
 
   const validation = Yup.object({

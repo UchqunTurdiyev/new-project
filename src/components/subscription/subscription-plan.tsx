@@ -7,7 +7,6 @@ import { SubscriptionPlanProps } from "./subscription-plan-props";
 import { PlanCard } from './../plan-card/planCard';
 
 export const SubscriptionPlan = ({ products }: SubscriptionPlanProps) => {
-  console.log(products);
 
   const { logout } = useAuth();
   return (

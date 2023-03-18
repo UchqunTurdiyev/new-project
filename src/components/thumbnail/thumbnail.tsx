@@ -8,11 +8,9 @@ import { useInfoStore } from 'src/store';
 export const Thumbnail = ({ movie, isBig = false }: ThumbnailProps) => {
   const { setModal, setCurrentMovie} = useInfoStore()
 
-
   const handleCurrentModal = () => {
     setModal(true), setCurrentMovie(movie)
   }
-
 
   return (
     <div

@@ -7,7 +7,6 @@ import {
 } from "firebase/auth";
 import { auth } from "src/firebase";
 import { useState } from "react";
-import { async } from "@firebase/util";
 import { useRouter } from "next/router";
 
 export const useAuth = () => {

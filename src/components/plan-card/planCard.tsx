@@ -20,7 +20,7 @@ export const PlanCard = ({product}: PlanCardProps) => {
         alt="card img"
       />
       <p className="absolute top-0 bg-black/90 text-white font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">
-        $ {product.default_price.unit_amount}
+        {(product.default_price.unit_amount / 100).toLocaleString("en-US", {style: "currency", currency: "USD"})}
       </p>
       <div className="absolute rounded-xl left-0 top-0 bg-black/20 h-full w-full"></div>
     </div>

@@ -23,7 +23,6 @@ export const Modal = () => {
   useEffect(() => {
     const fetchVideoData = async () => {
       const data = await fetch(api).then((res) => res.json());
-      console.log(data);
 
       if (data?.results) {
         const index = data.results.findIndex(
