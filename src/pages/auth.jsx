@@ -16,7 +16,7 @@ const Auth = () => {
   if(user) router.push('/')
   if(isLoading) return <><Loader /></>
 
-  const onSubmit = (formData) => {
+  const onSubmit =async (formData) => {
     signIn(formData.email, formData.password)
   };
 
@@ -81,7 +81,7 @@ const Auth = () => {
             </button>
             <div className="text-slate-500">
               Not yet account?
-              <Link href="/logout" className="text-white hover:underline pl-2">
+              <Link href="/signUp" className="text-white hover:underline pl-2">
                 Sign Up Now
               </Link>
             </div>

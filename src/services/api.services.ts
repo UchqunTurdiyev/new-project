@@ -1,6 +1,6 @@
 const base_url = process.env.NEXT_PUBLIC_API_DOMAIN as string
-const api_key = process.env.NEXT_PUBLIC_API_KEY as string
 const publik_domain = process.env.NEXT_PUBLICK_DOMAIN as string
+const api_key = process.env.NEXT_PUBLIC_API_KEY as string
 
 
 export const API_REQUEST = {

@@ -2,22 +2,27 @@ import Head from "next/head";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import Link from "next/link";
-import TextField from "./../components/text-field/textField";
+import TextField from "../components/text-field/textField";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { AuthContext } from "./../context/auth.context";
+import { AuthContext } from "../context/auth.context";
 
 const Logout = () => {
   const { isLoading, error, signUp} = useContext(AuthContext);
 
   const onSubmit = async (formData:{ email:string, password: string}) => {
     signUp(formData.email, formData.password)
+    console.log(formData.email);
+    
     const response = await fetch("/api/customer", {
       method: 'POST',
-      headers: {'Content-type': 'aplication/json'},
+      headers: {'Content-Type': 'aplication/json'},
       body: JSON.stringify({email: formData.email})
+      
     })
-    await response.json()
+   const data = await response.json()
+   console.log(data);
+   
   };
 
   const validation = Yup.object({
