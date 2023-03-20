@@ -20,7 +20,7 @@ export default function Cancel() {
 					<MdReportGmailerrorred className='w-20 h-20 text-red-600' />
 					<h1 className='text-2xl md:text-5xl mt-4'>Canceled Subscription</h1>
 					<Link href={'/'}>
-						<button className='mt-6 bg-[#e10856] hover:bg-[#870c39] py-4 px-6 rounded'>Choose Plan</button>
+						<button className='mt-6 bg-red-600 hover:bg-red-500 py-4 px-6 rounded'>Choose Plan</button>
 					</Link>
 				</div>
 			</div>
