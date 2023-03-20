@@ -12,15 +12,6 @@ const Logout = () => {
 
 	const onSubmit = async (formData: { email: string; password: string }) => {
 		signUp(formData.email, formData.password);
-		console.log(formData.email);
-
-		const response = await fetch('/api/customer', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email: formData.email }),
-		});
-		const data = await response.json();
-		console.log(data);
 	};
 
 	const validation = Yup.object({
