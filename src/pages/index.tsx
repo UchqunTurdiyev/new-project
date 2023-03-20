@@ -1,12 +1,9 @@
 import Head from 'next/head';
 import { Header, Hero } from 'src/components';
 import { API_REQUEST } from './../services/api.services';
-import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { IMove, Product } from './../interfaces/app.interfaces';
 import { Row } from 'src/components/row/row';
-import { useContext } from 'react';
-import { AuthContext } from './../context/auth.context';
 import { useInfoStore } from 'src/store';
 import { Modal } from './../components/modal/Modal';
 import { SubscriptionPlan } from './../components/subscription/subscription-plan';
@@ -21,10 +18,6 @@ export default function Home({
 	products,
 	subscription,
 }: HomeProps): JSX.Element {
-	const { isLoading } = useContext(AuthContext);
-
-	if (isLoading) return <>{null}</>;
-
 	//eslint-disable-next-line
 	const { modal } = useInfoStore();
 	// const {isLoading} = useContext(AuthContext)
@@ -60,6 +53,13 @@ export default function Home({
 // SERVISE SITE RENDERING
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({ req }) => {
 	const user_id = req.cookies.user_id;
+
+	if (!user_id) {
+		return {
+			redirect: { destination: '/auth', permanent: false },
+		};
+	}
+
 	const [trending, topRated, tvTopRated, popular, documentary, comedy, family, history, products, subscription] =
 		await Promise.all([
 			fetch(API_REQUEST.trending).then(res => res.json()),

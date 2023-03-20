@@ -3,7 +3,6 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import { useAuth } from './../hooks/useAuth';
 import { useEffect } from 'react';
 import { auth } from 'src/firebase';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Loader from 'src/components/loader/Loader';
 
@@ -28,7 +27,6 @@ export const AuthContext = createContext<AuthContextState>({
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 	const [initialLoader, setInitialLoader] = useState<boolean>(true);
 	const { error, isLoading, logout, signIn, signUp, user, setUser, setIsloading } = useAuth();
-	const router = useRouter();
 
 	const value = useMemo(
 		() => ({
@@ -48,18 +46,14 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 		() =>
 			onAuthStateChanged(auth, user => {
 				if (user) {
-					setIsloading(false);
 					setUser(user);
 				} else {
-					setIsloading(true);
 					setUser(null);
-					router.push('/auth');
 				}
 				setIsloading(false);
 				setInitialLoader(false);
-
-				//eslint-disable-next-line
 			}),
+		//eslint-disable-next-line
 		[]
 	);
 

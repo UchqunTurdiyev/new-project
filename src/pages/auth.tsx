@@ -6,14 +6,12 @@ import TextField from '../components/text-field/textField';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { AuthContext } from '../context/auth.context';
-import { useRouter } from 'next/router';
 import Loader from 'src/components/loader/Loader';
+import { GetServerSideProps } from 'next';
 
 const Auth = () => {
 	const { isLoading, error, signIn, user } = useContext(AuthContext);
-	const router = useRouter();
 
-	if (user) router.push('/');
 	if (isLoading)
 		return (
 			<>
@@ -74,3 +72,17 @@ const Auth = () => {
 };
 
 export default Auth;
+
+// SERVISE SITE RENDERING
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+	const user_id = req.cookies.user_id;
+
+	if (user_id) {
+		return {
+			redirect: { destination: '/', permanent: false },
+		};
+	}
+	return {
+		props: {},
+	};
+};

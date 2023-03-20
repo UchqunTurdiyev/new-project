@@ -6,6 +6,7 @@ import TextField from '../components/text-field/textField';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { AuthContext } from '../context/auth.context';
+import { GetServerSideProps } from 'next';
 
 const Logout = () => {
 	const { isLoading, error, signUp } = useContext(AuthContext);
@@ -63,3 +64,17 @@ const Logout = () => {
 };
 
 export default Logout;
+
+// SERVISE SITE RENDERING
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+	const user_id = req.cookies.user_id;
+
+	if (user_id) {
+		return {
+			redirect: { destination: '/', permanent: false },
+		};
+	}
+	return {
+		props: {},
+	};
+};
