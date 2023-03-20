@@ -2,10 +2,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useContext, useState } from 'react';
 import Link from 'next/link';
-import TextField from './../components/text-field/textField';
+import TextField from '../components/text-field/textField';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { AuthContext } from './../context/auth.context';
+import { AuthContext } from '../context/auth.context';
 import { useRouter } from 'next/router';
 import Loader from 'src/components/loader/Loader';
 

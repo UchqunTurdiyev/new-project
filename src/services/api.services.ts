@@ -12,6 +12,7 @@ export const API_REQUEST = {
 	family: `${base_url}/discover/movie?api_key=${api_key}&language=en-US&with_genres=10751`,
 	history: `${base_url}/discover/movie?api_key=${api_key}&language=en-US&with_genres=36`,
 	products_list: `${publik_domain}/api/products`,
+	subscription: `${publik_domain}/api/subscription`,
 };
 
 // playing: `${base_url}/movie/now_playing?api_key=${api_key}&language=en-US&page=1`,
