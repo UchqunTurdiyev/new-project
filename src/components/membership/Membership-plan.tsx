@@ -46,9 +46,14 @@ export default function MemberShipPan({ subscription }: MembershipPLanProps) {
 					<div>
 						<div className='flex items-center gap-2'>
 							<span className='py-1 px-3 uppercase bg-white/20 rounded'>
-								{subscription.customer.invoice_settings.default_payment_method.card.brand}
+								{subscription.default_payment_method
+									? subscription.default_payment_method.card.brand
+									: subscription.customer.invoice_settings.default_payment_method.card.brand}
 							</span>
-							**** **** **** {subscription.customer.invoice_settings.default_payment_method.card.last4}
+							**** **** ****{' '}
+							{subscription.default_payment_method
+								? subscription.default_payment_method.card.last4
+								: subscription.customer.invoice_settings.default_payment_method.card.last4}
 						</div>
 						<p className='mt-4'>
 							Your next billing date is {moment(subscription.current_period_end * 1000).format('DD MMMM, YYYY')}

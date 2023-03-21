@@ -8,9 +8,10 @@ import MemberShipPan from 'src/components/membership/Membership-plan';
 import { Subscription } from 'src/interfaces/app.interfaces';
 import { API_REQUEST } from './../services/api.services';
 import moment from 'moment';
+import { useAuth } from './../hooks/useAuth';
 
 export default function account({ subscription }: AccountProps) {
-	console.log(subscription);
+	const { logout } = useAuth();
 
 	return (
 		<>
@@ -53,7 +54,9 @@ export default function account({ subscription }: AccountProps) {
 
 				<div className='mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0'>
 					<h4 className='text-lg text-slate-400'>Settings</h4>
-					<p className='col-span-3 cursor-pointer text-blue-500 hover:underline'>Sign out of all devices</p>
+					<p className='col-span-3 cursor-pointer text-blue-500 hover:underline' onClick={logout}>
+						Sign out of all devices
+					</p>
 				</div>
 			</main>
 		</>

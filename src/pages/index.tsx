@@ -7,6 +7,9 @@ import { Row } from 'src/components/row/row';
 import { useInfoStore } from 'src/store';
 import { Modal } from './../components/modal/Modal';
 import { SubscriptionPlan } from './../components/subscription/subscription-plan';
+import { useEffect, useContext } from 'react';
+import { getList } from './../helpers/list';
+import { AuthContext } from 'src/context/auth.context';
 
 export default function Home({
 	trending,
@@ -20,10 +23,16 @@ export default function Home({
 }: HomeProps): JSX.Element {
 	//eslint-disable-next-line
 	const { modal } = useInfoStore();
+	// const { user } = useContext(AuthContext);
 	// const {isLoading} = useContext(AuthContext)
 
 	// const subscription = false;
+	// useEffect(async () => {
+	// 	const myList = await getList(user?.uid);
+	// 	console.log(myList);
+	// }, []);
 
+	//condition
 	if (!subscription.length) return <SubscriptionPlan products={products} />;
 
 	return (

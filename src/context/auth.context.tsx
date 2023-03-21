@@ -50,8 +50,8 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 				} else {
 					setUser(null);
 				}
-				setIsloading(false);
 				setInitialLoader(false);
+				setIsloading(false);
 			}),
 		//eslint-disable-next-line
 		[]
