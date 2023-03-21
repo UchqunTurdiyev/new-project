@@ -1,6 +1,8 @@
 import React from 'react';
+import { MembershipPLanProps } from './membership-plan.props';
+import moment from 'moment';
 
-export default function MemberShipPan() {
+export default function MemberShipPan({ subscription }: MembershipPLanProps) {
 	return (
 		<div className='mt-6 grid grid-cols-1 gap-x-4 border p-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0'>
 			<div className='space-y-6 py-4'>
@@ -12,7 +14,7 @@ export default function MemberShipPan() {
 			<div className='col-span-3'>
 				<div className='flex flex-col justify-between border-b border-white/10 py-4 md:flex-row'>
 					<div>
-						<p className='font-medium'>info@gamil.com</p>
+						<p className='font-medium'>{subscription.customer.email}</p>
 						<p className='text-slate-400'>Password: ******</p>
 					</div>
 					<div className='md:text-right'>
@@ -22,7 +24,7 @@ export default function MemberShipPan() {
 				</div>
 				<div className='flex flex-col justify-between py-4 md:flex-row md:pb-0'>
 					<div>
-						<p>Your membership plan will end 14 March 2023</p>
+						<p>Your membership plan will end {moment(subscription.current_period_end * 1000).format('DD MMMM, YYYY')}</p>
 					</div>
 					<div className='md:text-right'>
 						<p className='membership_link'>Manage payment info</p>
