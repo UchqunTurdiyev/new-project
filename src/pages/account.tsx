@@ -71,6 +71,14 @@ export const getServerSideProps: GetServerSideProps<AccountProps> = async ({ req
 	}
 	const subscription = await fetch(`${API_REQUEST.subscription}/${user_id}`).then(res => res.json());
 
+	if (!subscription.subscription.data.length) {
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false,
+			},
+		};
+	}
 	return {
 		props: {
 			subscription: subscription.subscription.data[0],
