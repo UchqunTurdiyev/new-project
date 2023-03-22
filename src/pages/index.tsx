@@ -19,11 +19,10 @@ export default function Home({
 	comedy,
 	products,
 	subscription,
-	list,
-}: HomeProps): JSX.Element {
+}: // list,
+HomeProps): JSX.Element {
 	//eslint-disable-next-line
 	const { modal } = useInfoStore();
-	console.log(list);
 
 	//condition
 	if (!subscription.length) return <SubscriptionPlan products={products} />;
@@ -44,7 +43,7 @@ export default function Home({
 				<section>
 					<Row title='Top Rated' movies={topRated} />
 					<Row title='TV show' movies={tvTopRated} isBig={true} />
-					{list.length ? <Row title='My List' movies={list} /> : null}
+					{/* {list.length ? <Row title='My List' movies={list} /> : null} */}
 					<Row title='Popular' movies={popular} />
 					<Row title='History' movies={history} />
 					<Row title='Comedy' movies={comedy} isBig={true} />
@@ -80,7 +79,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({ req })
 			fetch(`${API_REQUEST.subscription}/${user_id}`).then(res => res.json()),
 		]);
 
-	const myList: MyList[] = await getList(user_id);
+	// const myList: MyList[] = await getList(user_id);
 
 	return {
 		props: {
@@ -94,7 +93,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({ req })
 			history: history.results,
 			products: products.products.data,
 			subscription: subscription.subscription.data,
-			list: myList.map(c => c.userId),
+			// list: myList.map(c => c.userId),
 		},
 	};
 };
@@ -110,5 +109,5 @@ interface HomeProps {
 	history: IMove[];
 	products: Product[];
 	subscription: string[];
-	list: IMove[];
+	// list: IMove[];
 }
