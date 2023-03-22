@@ -10,14 +10,16 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from 'src/firebase';
 import { useAuth } from './../../hooks/useAuth';
 import { AuthContext } from 'src/context/auth.context';
+import { useRouter } from 'next/router';
 
 export const Modal = () => {
 	const { modal, setModal, currentMovie } = useInfoStore();
 	const [trailer, setTrailer] = useState<string>('');
 	const [muted, setMuted] = useState<boolean>(true);
 	const [playing, setPlaying] = useState<boolean>(true);
+	const [isLoading, setIsloading] = useState<boolean>(false);
 	const { user } = useContext(AuthContext);
-
+	const router = useRouter();
 	const base_url = process.env.NEXT_PUBLIC_API_DOMAIN as string;
 	const api_key = process.env.NEXT_PUBLIC_API_KEY as string;
 
@@ -40,14 +42,17 @@ export const Modal = () => {
 	}, [currentMovie]);
 
 	const addProductList = async () => {
+		setIsloading(true);
 		try {
-			const docRef = await addDoc(collection(db, 'list'), {
+			await addDoc(collection(db, 'list'), {
 				userId: user?.uid,
-				list: currentMovie,
+				product: currentMovie,
 			});
-			console.log(docRef);
+			setIsloading(false);
+			router.replace(router.asPath);
 		} catch (e) {
 			console.error('Error adding document: ', e);
+			setIsloading(false);
 		}
 	};
 
@@ -94,7 +99,7 @@ export const Modal = () => {
 								)}
 							</button>
 							<button className='modalButton' onClick={addProductList}>
-								<BsPlusLg className='w-5 h-5' />
+								{isLoading ? '...' : <BsPlusLg className='w-5 h-5' />}
 							</button>
 							<button className='modalButton '>
 								<AiOutlineLike className='w-5 h-5' />

@@ -1,8 +1,8 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'src/firebase';
-import { MyList } from './../interfaces/app.interfaces';
+import { MyList } from '../interfaces/app.interfaces';
 
-export const getList = async (userId: string) => {
+export const getList = async (userId?: string) => {
 	let myList: MyList[] = [];
 	const querySnapshot = await getDocs(collection(db, 'list'));
 	querySnapshot.forEach(doc => {
@@ -10,5 +10,6 @@ export const getList = async (userId: string) => {
 			myList.push(doc.data() as MyList);
 		}
 	});
+
 	return myList;
 };

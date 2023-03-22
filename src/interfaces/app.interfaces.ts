@@ -34,6 +34,11 @@ export interface Product {
 	name: string;
 }
 
+export interface MyList {
+	userId: string;
+	product: IMove;
+}
+
 export interface Subscription {
 	current_period_start: number;
 	id: string;
@@ -67,9 +72,4 @@ export interface Subscription {
 			};
 		};
 	};
-}
-
-export interface MyList {
-	userId: string;
-	product: IMove;
 }
