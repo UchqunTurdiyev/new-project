@@ -6,11 +6,12 @@ import { FiUser } from 'react-icons/fi';
 import { MdSubscriptions } from 'react-icons/md';
 import MemberShipPan from 'src/components/membership/Membership-plan';
 import { Subscription } from 'src/interfaces/app.interfaces';
-import { API_REQUEST } from './../services/api.services';
+import { API_REQUEST } from '../services/api.services';
 import moment from 'moment';
-import { useAuth } from './../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth';
+import { AuthContext } from '../context/auth.context';
 
-export default function account({ subscription }: AccountProps) {
+export default function Account({ subscription }: AccountProps) {
 	const { logout } = useAuth();
 
 	return (
