@@ -3,7 +3,7 @@ import { MembershipPLanProps } from './membership-plan.props';
 import moment from 'moment';
 import { useState } from 'react';
 
-export default function MemberShipPan({ subscription }: MembershipPLanProps) {
+export function MemberShipPan({ subscription }: MembershipPLanProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const openPortal = async () => {
 		setIsLoading(true);
