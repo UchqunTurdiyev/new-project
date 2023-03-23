@@ -4,12 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiUser } from 'react-icons/fi';
 import { MdSubscriptions } from 'react-icons/md';
-import MemberShipPan from 'src/components/membership/Membership-plan';
 import { Subscription } from 'src/interfaces/app.interfaces';
 import { API_REQUEST } from '../services/api.services';
 import moment from 'moment';
 import { useAuth } from '../hooks/useAuth';
-import { AuthContext } from '../context/auth.context';
+import { MemberShipPan } from 'src/components';
 
 export default function Account({ subscription }: AccountProps) {
 	const { logout } = useAuth();
