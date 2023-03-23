@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Link from 'next/link';
 import TextField from '../components/text-field/textField';
 import { Formik, Form } from 'formik';

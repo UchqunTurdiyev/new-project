@@ -19,7 +19,7 @@ const Auth = () => {
 			</>
 		);
 
-	const onSubmit = async formData => {
+	const onSubmit = async (formData: { email: string; password: string }) => {
 		signIn(formData.email, formData.password);
 	};
 
