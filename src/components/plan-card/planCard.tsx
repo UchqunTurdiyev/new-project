@@ -10,7 +10,7 @@ export const PlanCard = ({ product }: PlanCardProps) => {
 
 	const onSubmitSubscription = async (priceId: string) => {
 		setIsLoading(true);
-		// const payload = { email: user?.email, priceId };/
+		const payload = { email: user?.email, priceId };
 
 		try {
 			const response = await fetch('/api/subscription', {
