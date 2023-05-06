@@ -1,12 +1,13 @@
-import { initializeApp, getApp, getApps } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+// Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: 'AIzaSyBu49sEJuzDIK2eL7D_YltKFuX1je_Jw4c',
-	authDomain: 'sammi-movie-app.firebaseapp.com',
-	projectId: 'sammi-movie-app',
-	storageBucket: 'sammi-movie-app.appspot.com',
-	messagingSenderId: '92350315428',
+	apiKey: 'AIzaSyDfeNieho-GehuH1KAWEJLEQt8fBGVJjUE',
+	authDomain: 'movie-app-19bae.firebaseapp.com',
+	projectId: 'movie-app-19bae',
+	storageBucket: 'movie-app-19bae.appspot.com',
+	messagingSenderId: '665592469160',
 	appId: '1:665592469160:web:f82ea080ff1420d1aa549d',
 };
 

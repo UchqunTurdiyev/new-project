@@ -1,9 +1,8 @@
-import React from 'react';
-import { PlanCardProps } from './plan-card.props';
-import { RiVipCrown2Line } from 'react-icons/ri';
-import { AiOutlineHourglass, AiOutlineVideoCameraAdd } from 'react-icons/ai';
-import { AuthContext } from 'src/context/auth.context';
 import { useContext, useState } from 'react';
+import { AiOutlineHourglass, AiOutlineVideoCameraAdd } from 'react-icons/ai';
+import { RiVipCrown2Line } from 'react-icons/ri';
+import { AuthContext } from 'src/context/auth.context';
+import { PlanCardProps } from './plan-card.props';
 
 export const PlanCard = ({ product }: PlanCardProps) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -11,7 +10,7 @@ export const PlanCard = ({ product }: PlanCardProps) => {
 
 	const onSubmitSubscription = async (priceId: string) => {
 		setIsLoading(true);
-		const payload = { email: user?.email, priceId };
+		// const payload = { email: user?.email, priceId };/
 
 		try {
 			const response = await fetch('/api/subscription', {
@@ -36,7 +35,10 @@ export const PlanCard = ({ product }: PlanCardProps) => {
 				{/* eslint-disable-next-line */}
 				<img className='w-full rounded-xl' src={product.images[0]} alt='card img' />
 				<p className='absolute top-0 bg-black/90 text-white font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg'>
-					{(product.default_price.unit_amount / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+					{(product.default_price.unit_amount / 100).toLocaleString('en-US', {
+						style: 'currency',
+						currency: 'USD',
+					})}
 				</p>
 				<div className='absolute rounded-xl left-0 top-0 bg-black/20 h-full w-full'></div>
 			</div>
