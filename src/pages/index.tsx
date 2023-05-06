@@ -111,3 +111,5 @@ interface HomeProps {
 	subscription: string[];
 	// list: IMove[];
 }
+
+//elenimate

@@ -10,7 +10,7 @@ import Loader from 'src/components/loader/Loader';
 import { GetServerSideProps } from 'next';
 
 const Auth = () => {
-	const { isLoading, error, signIn, user } = useContext(AuthContext);
+	const { isLoading, error, signIn } = useContext(AuthContext);
 
 	if (isLoading)
 		return (

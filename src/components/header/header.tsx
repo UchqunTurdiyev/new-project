@@ -44,7 +44,7 @@ export const Header = () => {
 				<AiOutlineSearch className='h-6 w-6 cursor-pointer' />
 				<p className='hidden lg:inline'>Kids</p>
 				<BiBellMinus className='h-6 w-6 cursor-pointer' />
-				<Link href={'account'}>
+				<Link href={'Account'}>
 					<FiUser className='h-6 w-6 cursor-pointer' />
 				</Link>
 				<AiOutlineLogout className='h-6 w-6 cursor-pointer' onClick={logout} />

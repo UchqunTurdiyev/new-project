@@ -7,7 +7,7 @@ const firebaseConfig = {
 	projectId: 'sammi-movie-app',
 	storageBucket: 'sammi-movie-app.appspot.com',
 	messagingSenderId: '92350315428',
-	appId: '1:92350315428:web:c9d8ca995f907d34f0df31',
+	appId: '1:665592469160:web:f82ea080ff1420d1aa549d',
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
